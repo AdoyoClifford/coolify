@@ -7,6 +7,16 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+// Health check endpoint for Coolify
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
 // Additional route for JSON response
 app.get('/api/hello', (req, res) => {
   res.json({
